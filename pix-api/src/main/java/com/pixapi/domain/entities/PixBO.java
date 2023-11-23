@@ -14,8 +14,8 @@ public class PixBO {
     private String base64;
     private LocalDateTime expiration;
 
-    public PixBO(UUID id, BigDecimal amount, String email, String description, String emv, String base64, LocalDateTime expiration) {
-        this.id = id;
+    public PixBO(String id, BigDecimal amount, String email, String description, String emv, String base64, LocalDateTime expiration) {
+        this.id = id != null ? UUID.fromString(id) : UUID.randomUUID();
         this.amount = amount;
         this.email = email;
         this.description = description;
