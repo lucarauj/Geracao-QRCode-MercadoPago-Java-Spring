@@ -15,6 +15,8 @@ public class CreatePix {
 
     public PixDto execute(PixDto pixDto) {
         PixBO bo = PixMapper.toBO(pixDto);
-        return pixRepository.create(pixDto);
+        PixDto createdPix = pixRepository.create(pixDto);
+        bo.updateEmvData(createdPix.getEmv(), createdPix.getBase64(), createdPix.getExpiration());
+        return createdPix;
     }
 }

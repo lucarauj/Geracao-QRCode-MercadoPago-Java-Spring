@@ -22,6 +22,18 @@ public class PixBO {
         this.emv = emv;
         this.base64 = base64;
         this.expiration = expiration;
+
+        validate();
+    }
+
+    public void validate() {
+
+    }
+
+    public void updateEmvData(String emv, String base64, LocalDateTime expiration) {
+        this.emv = emv;
+        this.base64 = base64;
+        this.expiration = expiration;
     }
 
     public UUID getId() {
