@@ -1,16 +1,20 @@
 package com.pixapi.infra.mercadoPago.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
 
 public class MpPixDto {
 
     private String description;
+
     @JsonProperty("payment_method_id")
     private String paymentMethodId;
+
     @JsonProperty("transaction_amount")
     private BigDecimal amount;
+
     private MpPixPayerDto payer;
 
     public String getDescription() {
@@ -44,4 +48,14 @@ public class MpPixDto {
     public void setPayer(MpPixPayerDto payer) {
         this.payer = payer;
     }
+
+    public String toJson() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(this);
+        } catch (Exception e) {
+            return "Erro ao serializar para JSON: " + e.getMessage();
+        }
+    }
+
 }
