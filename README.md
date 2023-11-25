@@ -68,7 +68,7 @@ TG-656276ce0c63da00017ce7b1-xxxxxxxxx
 
 <br>
 
-## Resposta QRCode:
+## Requisição QRCode:
 
 - Uri da Requisição:
 
