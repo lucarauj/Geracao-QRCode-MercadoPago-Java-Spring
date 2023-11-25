@@ -1,19 +1,20 @@
 # Projeto Geração de QRCode MercadoPago com Java - Spring
 
+<br>
 
 ## Criando Aplicação no MercadoPago
 
-- https://www.mercadopago.com.br/developers/pt
+- ```https://www.mercadopago.com.br/developers/pt```
 - Suas integrações
 - Criar aplicação (Pagamentos on-line | Não | CheckoutTransparente | Marketplace) 
 - Ativar Credenciais de produção
-- https://auth.mercadopago.com/authorization?client_id=APP_ID&response_type=code&platform_id=mp&state=RANDOM_ID&redirect_uri=https://www.redirect-url.com
+- ```https://auth.mercadopago.com/authorization?client_id=APP_ID&response_type=code&platf orm_id=mp&state=RANDOM_ID&redirect_uri=https://www.redirect-url.com```
 
 <br>
 
 ## Utilizando o Postman
 
-- https://api.mercadopago.com/oauth/token
+- ```https://api.mercadopago.com/oauth/token```
 - body:
 ```
 {
@@ -272,3 +273,9 @@ Key: X-Idempotency-Key | Value: número aleatório
 ```
 
 <br>
+
+# 👨🏼‍🎓 Aluno
+
+Lucas Araujo
+
+<a href="https://www.linkedin.com/in/lucarauj"><img alt="lucarauj | LinkdeIN" width="40px" src="https://user-images.githubusercontent.com/43545812/144035037-0f415fc7-9f96-4517-a370-ccc6e78a714b.png" /></a>
