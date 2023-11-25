@@ -2,7 +2,6 @@ package com.pixapi.infra.mercadoPago.repository;
 
 import com.pixapi.infra.mercadoPago.dto.MpPixDto;
 import com.pixapi.infra.mercadoPago.dto.MpPixResponse;
-import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

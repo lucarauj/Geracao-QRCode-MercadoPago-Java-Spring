@@ -18,14 +18,17 @@ import java.net.http.HttpResponse;
 public class RestClientMpImpl implements RestClientMp {
 
     private final URI baseUri;
+    private final HttpClient httpClient;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public RestClientMpImpl(URI baseUri) {
+    public RestClientMpImpl(URI baseUri, HttpClient httpClient, ObjectMapper objectMapper) {
         this.baseUri = baseUri;
+        this.httpClient = httpClient;
+        this.objectMapper = objectMapper;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(RestClientMpImpl.class);
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public MpPixResponse createPix(String token, String idempotency, MpPixDto payload) {
@@ -38,21 +41,44 @@ public class RestClientMpImpl implements RestClientMp {
                 .POST(HttpRequest.BodyPublishers.ofString(payload.toJson()))
                 .build();
 
-        HttpClient client = HttpClient.newHttpClient();
-
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            logRequestAndResponse(url, request, response);
 
             if (response.statusCode() == 200) {
                 MpPixResponse mpPixResponse = objectMapper.readValue(response.body(), MpPixResponse.class);
-                return mpPixResponse;
+                if (mpPixResponse != null) {
+                    return mpPixResponse;
+                } else {
+                    logger.warn("Response body is empty");
+                }
             } else {
-                logger.warn("Requisição retornou código de status não esperado: {}", response.statusCode());
+                handleErrorResponse(response);
             }
         } catch (IOException | InterruptedException e) {
-            logger.error("Erro ao fazer a requisição HTTP", e);
+            handleRequestException(e);
         }
 
         return null;
+    }
+
+    private void logRequestAndResponse(String url, HttpRequest request, HttpResponse<String> response) {
+        logger.info("HTTP Request to {}: {}", url, request.method());
+        logger.info("Headers: {}", request.headers().map());
+        logger.info("Request Body: {}", request.bodyPublisher().orElse(HttpRequest.BodyPublishers.noBody()));
+
+        logger.info("HTTP Response: {}", response.statusCode());
+        logger.info("Response Headers: {}", response.headers().map());
+        logger.info("Response Body: {}", response.body());
+    }
+
+    private void handleErrorResponse(HttpResponse<String> response) {
+        logger.warn("HTTP Request returned unexpected status code: {}", response.statusCode());
+        logger.warn("Response Body: {}", response.body());
+    }
+
+    private void handleRequestException(Exception e) {
+        logger.error("Error making HTTP request", e);
     }
 }
