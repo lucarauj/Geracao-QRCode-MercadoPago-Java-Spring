@@ -50,6 +50,7 @@
 - @PostMapping
 - @Produces(MediaType.APPLICATION_JSON)
 - @RestController
+- @RequestBody
 - @Repository
 - @RequestMapping
 - @Service

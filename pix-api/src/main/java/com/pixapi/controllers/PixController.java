@@ -4,6 +4,7 @@ import com.pixapi.domain.dto.PixDto;
 import com.pixapi.service.PixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,7 @@ public class PixController {
 
     @PostMapping("/pix")
     @Produces(MediaType.APPLICATION_JSON)
-    public PixDto create(PixDto dto) {
-
+    public PixDto create(@RequestBody PixDto dto) {
         return pixService.genPix(dto);
     }
 }

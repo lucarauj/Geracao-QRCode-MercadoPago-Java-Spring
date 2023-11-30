@@ -6,6 +6,7 @@ import com.pixapi.infra.mercadoPago.dto.MpPixResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -46,7 +47,7 @@ public class RestClientMpImpl implements RestClientMp {
                 System.out.println("Erro na solicitação: " + response.statusCode());
                 return null;
             }
-        } catch (Exception e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
         }

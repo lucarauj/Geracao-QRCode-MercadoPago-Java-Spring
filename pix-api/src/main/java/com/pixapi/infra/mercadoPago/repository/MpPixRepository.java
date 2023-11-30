@@ -17,13 +17,13 @@ public class MpPixRepository implements IPixRepository {
     private RestClientMp restClient;
     @Override
     public PixDto create(PixDto dto) {
-        String token = "Bearer TEST-4025927553539549-112514-7e5c6e4231bbf429a5050ca056609277-184173903";
+        String token = "Bearer TEST-4025927553539549-112316-24a3bc07d102c9454bf12959d92b153e-184173903";
         String idempotencyKey = UUID.randomUUID().toString();
 
         MpPixPayerDto payerDto = new MpPixPayerDto();
-        MpPixDto pixDto = new MpPixDto();
         payerDto.setEmail(dto.getEmail());
 
+        MpPixDto pixDto = new MpPixDto();
         pixDto.setAmount(dto.getAmount());
         pixDto.setDescription(dto.getDescription());
         pixDto.setPaymentMethodId("pix");
